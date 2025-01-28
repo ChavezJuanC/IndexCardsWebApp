@@ -14,10 +14,10 @@ function CardEditorTopMenu() {
                 </div>
                 <div className="flex flex-row justify-between">
                     <div className="hover:cursor-pointer mx-10 text-xl font-semibold">
-                        Load
+                        BYOQ
                     </div>
                     <div className="hover:cursor-pointer mx-10 text-xl font-semibold">
-                        BYOC
+                        Load
                     </div>
                     <div className="hover:cursor-pointer mx-10 text-xl font-semibold">
                         AI
