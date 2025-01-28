@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 function HomeTopMenu() {
+    const navigate = useNavigate();
     return (
         <div className="flex flex-row justify-between border-black border-3 h-10 rounded-md">
             <div
-                onClick={() => console.log("Clicked")}
+                onClick={() => navigate("/edit-cards/home")}
                 className="hover:cursor-pointer mx-20 text-xl font-semibold"
             >
                 Edit Cards

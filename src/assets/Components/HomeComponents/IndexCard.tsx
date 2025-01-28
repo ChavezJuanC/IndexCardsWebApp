@@ -16,16 +16,17 @@ function IndexCard({ question, answer }: IndexCardProps) {
 
     return (
         <div className="flex flex-col h-full">
+            {/* Top section (Question) */}
             <div className="flex-grow-[3] overflow-auto p-2">{question}</div>
             <hr />
-            {/*This section should show a "show" button to reveal answer*/}
-            <div className="flex-grow-[1] overflow-auto p-2">
+            {/* Bottom section (Answer or Show Button) */}
+            <div className="flex-grow-[1] min-h-[100px] overflow-auto p-2 flex justify-center items-center">
                 {showAnswer ? (
-                    answer
+                    <div className="overflow-auto h-full w-full">{answer}</div>
                 ) : (
                     <div
                         onClick={handleShowAnswer}
-                        className="border-2 border-black h-10 w-30 flex justify-center items-center mx-auto mt-10 rounded-md
+                        className="border-2 border-black h-10 w-30 flex justify-center items-center rounded-md
                         hover:cursor-pointer"
                     >
                         Show Answer
