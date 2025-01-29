@@ -27,7 +27,6 @@ export default CardEditorHome;
 /*
 NEXT STEPS
 
--create routing for BYOQ , LOAD and AI..
 -start implementing actual question creation and write to local file (temp)???
 -use local file to populate question cards
 -load questions from saved file....
