@@ -13,13 +13,22 @@ function CardEditorTopMenu() {
                     Home
                 </div>
                 <div className="flex flex-row justify-between">
-                    <div className="hover:cursor-pointer mx-10 text-xl font-semibold">
+                    <div
+                        className="hover:cursor-pointer mx-10 text-xl font-semibold"
+                        onClick={() => navigate("/edit-cards/byoq")}
+                    >
                         BYOQ
                     </div>
-                    <div className="hover:cursor-pointer mx-10 text-xl font-semibold">
+                    <div
+                        className="hover:cursor-pointer mx-10 text-xl font-semibold"
+                        onClick={() => navigate("/edit-cards/load")}
+                    >
                         Load
                     </div>
-                    <div className="hover:cursor-pointer mx-10 text-xl font-semibold">
+                    <div
+                        className="hover:cursor-pointer mx-10 text-xl font-semibold"
+                        onClick={() => navigate("/edit-cards/ai")}
+                    >
                         AI
                     </div>
                 </div>
