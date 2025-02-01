@@ -1,11 +1,21 @@
 from fastapi import FastAPI, HTTPException
 from Models import QuestionModel
 import json
+from fastapi.middleware.cors import CORSMiddleware
 
 # ID counter global var
 idCounter : int = 0
 
 app = FastAPI()
+
+##not very tailored 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
 
 @app.get("/")
 async def ping_server():
