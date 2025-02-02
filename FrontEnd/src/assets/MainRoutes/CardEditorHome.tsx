@@ -37,7 +37,10 @@ function CardEditorHome() {
                     <NewCardForm />
                 </div>
                 <div className="mt-10 mx-auto w-3/4">
-                    <CardLogs questions={questionsList}/>
+                    <CardLogs
+                        questions={questionsList}
+                        setQuestionList={setQuestionsList}
+                    />
                 </div>
                 <div className="h-12">{/*Spacer */}</div>
             </div>
