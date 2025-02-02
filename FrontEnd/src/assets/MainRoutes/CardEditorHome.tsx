@@ -2,29 +2,23 @@ import CardEditorTopMenu from "../Components/CardEditorHomeComponents/CardEditor
 import CardLogs from "../Components/CardEditorHomeComponents/CardLogs";
 import NewCardForm from "../Components/CardEditorHomeComponents/NewCardForm";
 import { useState, useEffect } from "react";
+import {
+    UpdateQuestionsList,
+    QuestionAnswerType,
+} from "../../HelperFunctions/ApiCalls";
 
 function CardEditorHome() {
-    const [questionsList, setQuestionsList] = useState([]);
-
-    const server: string = "http://127.0.0.1:8000";
-
-    async function fetchQuestions() {
-        const res = await fetch(`${server}/all-local-questions`);
-
-        try {
-            if (!res.ok) {
-                throw new Error("Network Error Fetching Quesions");
-            }
-            const questions = await res.json();
-            setQuestionsList(questions);
-            console.log(questions);
-        } catch (error) {
-            console.log(`Error: ${error}`);
-        }
-    }
+    const [questionsList, setQuestionsList] = useState<QuestionAnswerType[]>(
+        []
+    );
 
     useEffect(() => {
-        fetchQuestions();
+        async function setQuestions() {
+            const updatedQuestions: QuestionAnswerType[] =
+                await UpdateQuestionsList();
+            setQuestionsList(updatedQuestions);
+        }
+        setQuestions();
     }, []);
 
     return (

@@ -1,3 +1,5 @@
+import { UpdateQuestionsList } from "../../../HelperFunctions/ApiCalls";
+
 interface QuestionAnswer {
     id: number;
     question: string;
@@ -30,22 +32,10 @@ function QuestionAnswerPair({
             }
 
             console.log("Question with id {0} deleted successfully", id);
-            updateQuestions();
-        } catch (error) {
-            console.log(`Error: ${error}`);
-        }
-    }
 
-    async function updateQuestions() {
-        const res = await fetch(`${server}/all-local-questions`);
+            const newQuestionList: any[] = await UpdateQuestionsList();
 
-        try {
-            if (!res.ok) {
-                throw new Error("Network Error Fetching Quesions");
-            }
-            const questions = await res.json();
-            setQuestionsList(questions);
-            console.log(questions);
+            setQuestionsList(newQuestionList);
         } catch (error) {
             console.log(`Error: ${error}`);
         }
