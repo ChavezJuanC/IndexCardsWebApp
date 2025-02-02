@@ -1,12 +1,21 @@
 import React, { useState } from "react";
+import {
+    PostNewQuestion,
+    QuestionAnswerType,
+    UpdateQuestionsList,
+} from "../../../HelperFunctions/ApiCalls";
 
 // Define the type for the form data
-type FormData = {
+interface FormData {
     questionField: string;
     answerField: string;
-};
+}
 
-const NewCardForm: React.FC = () => {
+interface CardFormProps {
+    setQuestionList: Function;
+}
+
+const NewCardForm = ({ setQuestionList }: CardFormProps) => {
     const [formData, setFormData] = useState<FormData>({
         questionField: "",
         answerField: "",
@@ -23,9 +32,17 @@ const NewCardForm: React.FC = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const data: QuestionAnswerType = {
+            id: 0, // its okay to use 0, becuase the backend asigns the actual Id, for sure there is a better way to do this.. but this works now XD
+            question: formData.questionField,
+            answer: formData.answerField,
+        };
+        PostNewQuestion(data);
         console.log("Form Data Submitted:", formData);
+        const updatedQuestions = await UpdateQuestionsList();
+        setQuestionList(updatedQuestions);
     };
 
     return (

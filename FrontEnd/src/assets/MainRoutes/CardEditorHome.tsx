@@ -28,7 +28,7 @@ function CardEditorHome() {
                     <CardEditorTopMenu />
                 </div>
                 <div className="mx-auto w-1/2 mt-10">
-                    <NewCardForm />
+                    <NewCardForm setQuestionList={setQuestionsList} />
                 </div>
                 <div className="mt-10 mx-auto w-3/4">
                     <CardLogs

@@ -22,5 +22,23 @@ async function UpdateQuestionsList(): Promise<QuestionAnswerType[]> {
     }
 }
 
-export { UpdateQuestionsList, serverUrl };
+async function PostNewQuestion(question: QuestionAnswerType): Promise<string> {
+    const res: Response = await fetch(`${serverUrl}/new/question`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            //how to include body here??
+        },
+        body: JSON.stringify(question),
+    });
+
+    if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data: string = await res.json();
+    return data;
+}
+
+export { UpdateQuestionsList, serverUrl, PostNewQuestion };
 export type { QuestionAnswerType };
