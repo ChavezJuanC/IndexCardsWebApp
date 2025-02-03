@@ -1,16 +1,17 @@
 import IndexCard from "./IndexCard";
+import { QuestionAnswerType } from "../../../HelperFunctions/ApiCalls";
 
-function IndexCardArea() {
+interface IndexCardAreaProps {
+    currentCard: QuestionAnswerType;
+}
+
+//use this are to feed the index card values....
+function IndexCardArea({ currentCard }: IndexCardAreaProps) {
     return (
-        //after we have a list of questions to feed, use this space to update from default card message to actual cards..
-        //using next and previous buttons cycle through cards..
-        //on restart go to index 0 maybe add a shuffle feature later..
-        //using correct or incorrect keep track of question index and correctness
-
         <div className="border-2 border-black w-2/5 h-96 mx-auto rounded-md">
             <IndexCard
-                question="Please Select or Include a set of questions.."
-                answer="Please Select or Include a set of questions.."
+                question={currentCard.question}
+                answer={currentCard.question}
             />
         </div>
     );
