@@ -4,6 +4,7 @@ interface QuestionAnswerType {
     id: number;
     question: string;
     answer: string;
+    status: string;
 }
 
 async function UpdateQuestionsList(): Promise<QuestionAnswerType[]> {
@@ -15,6 +16,7 @@ async function UpdateQuestionsList(): Promise<QuestionAnswerType[]> {
             throw new Error("Network Error Fetching Quesions");
         }
         questions = await res.json();
+        console.log(questions);
         return questions.reverse();
     } catch (error) {
         console.log(`Error: ${error}`);

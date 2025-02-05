@@ -38,6 +38,7 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
             id: 0, // its okay to use 0, becuase the backend asigns the actual Id, for sure there is a better way to do this.. but this works now XD
             question: formData.questionField,
             answer: formData.answerField,
+            status: "unanswered",
         };
         PostNewQuestion(data);
         console.log("Form Data Submitted:", formData);

@@ -19,7 +19,7 @@ function CardEditorHome() {
             setQuestionsList(updatedQuestions);
         }
         setQuestions();
-    }, []);
+    }, [questionsList]);
 
     return (
         <>
@@ -44,12 +44,3 @@ function CardEditorHome() {
 }
 
 export default CardEditorHome;
-
-/*
-NEXT STEPS
-
--start implementing actual question creation and write to local file (temp)???
--use local file to populate question cards
--load questions from saved file....
-
-*/
