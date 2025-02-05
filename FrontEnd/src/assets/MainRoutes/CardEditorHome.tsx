@@ -19,7 +19,7 @@ function CardEditorHome() {
             setQuestionsList(updatedQuestions);
         }
         setQuestions();
-    }, [questionsList]);
+    }, [questionsList.length]);
 
     return (
         <>
