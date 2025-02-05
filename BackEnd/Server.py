@@ -27,6 +27,7 @@ async def new_question(question: QuestionModel.QuestionModel):
     global idCounter
     question.id = idCounter
     idCounter += 1
+    question.status = "unanswered"
 
     # Load existing data safely
     try:

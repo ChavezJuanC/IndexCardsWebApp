@@ -2,6 +2,13 @@
     {
         "id": 0,
         "question": "string",
-        "answer": "string"
+        "answer": "string",
+        "status": "unanswered"
+    },
+    {
+        "id": 1,
+        "question": "string",
+        "answer": "string",
+        "status": "unanswered"
     }
 ]

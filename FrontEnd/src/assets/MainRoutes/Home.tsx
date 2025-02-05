@@ -18,6 +18,8 @@ function Home() {
     );
     const [currentIndex, setcurrentIndex] = useState<number>(0); // Make currentIndex part of state
 
+    const [score, setScore] = useState<number>(0);
+
     useEffect(() => {
         async function setQuestions() {
             const updatedQuestions: QuestionAnswerType[] =
@@ -54,19 +56,36 @@ function Home() {
         }
     }, [currentIndex, questionsList]);
 
+    //card correctness
+    function setCorrectness(isCorrect: boolean) {
+        if (isCorrect) {
+            setScore(score + 1);
+        } else {
+            setScore(score - 1);
+        }
+
+        console.log(score);
+    }
+
     return (
         <>
             <div className="hidden xl:flex flex-col mt-22 h-full">
                 <div className="mx-auto w-3/4">
                     <HomeTopMenu />
                 </div>
-                <div className="mt-30 mb-30">
+                <div className="mt-10 mb-30">
+                    <div className="mx-auto flex justify-center border-2 mb-10">
+                        <div className="mx-10">
+                            Score: {score}/{questionsList.length}
+                        </div>
+                    </div>
                     <IndexCardArea currentCard={currentCard} />
                 </div>
                 <div className="mx-auto w-3/4">
                     <HomeBottomMenu
                         nextCard={nextCard}
                         previousCard={previousCard}
+                        setCorrectness={setCorrectness}
                     />
                 </div>
             </div>
