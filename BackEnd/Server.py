@@ -4,8 +4,7 @@ import json
 from fastapi.middleware.cors import CORSMiddleware
 import datetime
 
-# ID counter global var
-idCounter: int = 0
+ALLOWED_STATUSES = {"unanswered", "correct", "incorrect"}  # Use a set for faster lookup
 
 app = FastAPI()
 
@@ -18,21 +17,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/")
 async def ping_server():
     return {"Ping": "Ping"}
 
-
 ##Firs route should allow us to send a question and an answers +  ID and store it in a json file locally...
 @app.post("/new/question")
 async def new_question(question: QuestionModel.QuestionModel):
-    global idCounter
     ##create id here based on time and date
     now = datetime.datetime.now()
     newId = now.strftime("%Y%m%d%H%M%S")
     question.id = newId
-    idCounter += 1
     question.status = "unanswered"
 
     # Load existing data safely
@@ -133,8 +128,7 @@ import json
 
 @app.put("/local-questions/{id}/{status}")
 def update_question_status(id: str, status: str):
-    ALLOWED_STATUSES = {"unanswered", "correct", "incorrect"}  # Use a set for faster lookup
-    targetQuestion = None  # Initialize as None
+    targetQuestion = None  
 
     # Validate the status
     if status not in ALLOWED_STATUSES:
