@@ -4,18 +4,17 @@ import {
     QuestionAnswerType,
     UpdateQuestionsList,
 } from "../../HelperFunctions/ApiCalls";
+import IndexCardsArea from "../Components/HomeComponents/IndexCardsArea";
 
 function Home() {
-    const [questionList, setQuestionList] = useState<QuestionAnswerType[]>();
+    const [questionList, setQuestionList] = useState<QuestionAnswerType[]>([]);
 
     useEffect(() => {
         async function getLatestQuestions() {
             const questoions = await UpdateQuestionsList();
             setQuestionList(questoions);
         }
-
         getLatestQuestions();
-        console.log(questionList);
     }, []);
     return (
         <>
@@ -25,11 +24,8 @@ function Home() {
                 </div>
                 {/* Index card space 
                 --fetch cards from home....DONE
-                --create index card area component with props for QuestionAnswerType.. + state + controls comp
-                --feed the index cards area the list of cards... 
-                --cycle through the cards.. keeping track of current index..
-                --when the state changes.. send a post request by id -> questionBody .. and set stateful var to new status.. use returned body and update stateful list at question index.. 
                 */}
+                <IndexCardsArea questions={questionList} />
             </div>
             <div className="block xl:hidden">Please Extend Browser Size</div>
         </>
