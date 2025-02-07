@@ -16,6 +16,7 @@ function Home() {
         }
         getLatestQuestions();
     }, []);
+    
     return (
         <>
             <div className="hidden xl:flex flex-col mt-22 h-full">
@@ -25,7 +26,10 @@ function Home() {
                 {/* Index card space 
                 --fetch cards from home....DONE
                 */}
-                <IndexCardsArea questions={questionList} />
+                <IndexCardsArea
+                    questions={questionList}
+                    setQuestionList={setQuestionList}
+                />
             </div>
             <div className="block xl:hidden">Please Extend Browser Size</div>
         </>

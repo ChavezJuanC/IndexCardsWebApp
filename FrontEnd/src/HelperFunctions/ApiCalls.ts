@@ -41,5 +41,26 @@ async function PostNewQuestion(question: QuestionAnswerType): Promise<string> {
     return data;
 }
 
-export { UpdateQuestionsList, serverUrl, PostNewQuestion };
+async function updateQuestionById(
+    id: string,
+    status: string
+): Promise<QuestionAnswerType> {
+    const res: Response = await fetch(
+        `${serverUrl}/local-questions/${id}/${status}`,
+        {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+        }
+    );
+
+    if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data: QuestionAnswerType = await res.json();
+
+    return data;
+}
+
+export { UpdateQuestionsList, serverUrl, PostNewQuestion, updateQuestionById };
 export type { QuestionAnswerType };

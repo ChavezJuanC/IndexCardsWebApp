@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { QuestionAnswerType } from "../../../HelperFunctions/ApiCalls";
+import {
+    QuestionAnswerType,
+    updateQuestionById,
+} from "../../../HelperFunctions/ApiCalls";
 
 interface IndexCardsAreaProps {
     questions: QuestionAnswerType[];
+    setQuestionList: Function;
 }
 
-function IndexCardsArea({ questions }: IndexCardsAreaProps) {
+function IndexCardsArea({ questions, setQuestionList }: IndexCardsAreaProps) {
     const [currentCard, setCurrentCard] = useState<QuestionAnswerType>({
         id: 0,
         question: "Please add some questions",
-        answer: "Please add some answer",
+        answer: "Please add some answers",
         status: "unanswered",
     });
 
@@ -17,21 +21,32 @@ function IndexCardsArea({ questions }: IndexCardsAreaProps) {
         if (questions.length > 0) {
             setCurrentCard(questions[0]);
         }
-    });
+    }, [questions]);
 
-    function handleStatusUpdate(newState: string) {
-        console.log(newState);
-        //send update request to server by id.. update current card(stateful) with new reponse body also update on the list by id.
+    async function handleStatusUpdate(newState: string) {
+        try {
+            const updatedQuestion = await updateQuestionById(
+                currentCard.id.toString(),
+                newState
+            );
+
+            setCurrentCard(updatedQuestion);
+
+            const newList = questions.map((element) =>
+                element.id === currentCard.id ? updatedQuestion : element
+            );
+
+            setQuestionList(newList);
+            console.log("Update successful");
+        } catch (error) {
+            console.error("Failed to update status:", error);
+        }
     }
 
-    useEffect(() => {
-        console.log("Index Card Area Questions: ", questions);
-    });
-
     return (
-        <div className="w-1/2 border-2 border-black mx-auto">
+        <div>
             <div>{currentCard.status}</div>
-            <div className=" border-2 border-black mx-auto">
+            <div>
                 <div>
                     <div>{currentCard.question}</div>
                     <div>{currentCard.answer}</div>
@@ -39,7 +54,7 @@ function IndexCardsArea({ questions }: IndexCardsAreaProps) {
             </div>
             <div>
                 <div onClick={() => handleStatusUpdate("correct")}>Correct</div>
-                <div onClick={() => handleStatusUpdate("Incorrect")}>
+                <div onClick={() => handleStatusUpdate("incorrect")}>
                     Incorrect
                 </div>
             </div>
