@@ -16,10 +16,10 @@ async function UpdateQuestionsList(): Promise<QuestionAnswerType[]> {
             throw new Error("Network Error Fetching Quesions");
         }
         questions = await res.json();
-        return questions.reverse();
+        return questions;
     } catch (error) {
         console.log(`Error: ${error}`);
-        return questions.reverse();
+        return questions;
     }
 }
 
