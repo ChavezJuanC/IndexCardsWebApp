@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import QuestionAnswerPair from "./QuestionAnswerPair";
 
 interface Question {

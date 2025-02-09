@@ -17,6 +17,7 @@ function IndexCardsArea({ questions, setQuestionList }: IndexCardsAreaProps) {
         status: "unanswered",
     });
 
+    const [showAnswer, setShowAnswer] = useState<boolean>(false);
     const [currentCardIndex, setCurrentCardIndex] = useState<number>(0);
 
     useEffect(() => {
@@ -74,35 +75,67 @@ function IndexCardsArea({ questions, setQuestionList }: IndexCardsAreaProps) {
     }
 
     return (
-        <div>
-            <div>{currentCard.status}</div>
-            <div>
-                <div>
-                    <div>{currentCard.question}</div>
-                    <div>{currentCard.answer}</div>
+        <div className="mt-10">
+            <div className="mt-5 mb-15 text-2xl mx-auto text-center">
+                Status : {currentCard.status}
+            </div>
+            <div className="border-2 border-black w-1/2 mx-auto h-96 flex flex-col">
+                {/* Question Section (takes 3/4 of the card height) */}
+                <div className="flex-1 p-4 overflow-y-auto">
+                    {currentCard.question}
+                </div>
+
+                {/* Answer Section (takes 1/4 of the card height) */}
+                <div className="h-1/4 border-t-2 border-black relative">
+                    {/* Hide/Show Button (positioned above the answer box) */}
+                    <div
+                        onClick={() => setShowAnswer(!showAnswer)}
+                        className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-slate-50 border-2 border-black px-4 py-1 rounded-md cursor-pointer hover:bg-gray-100"
+                    >
+                        {showAnswer ? "Hide Answer" : "Show Answer"}
+                    </div>
+
+                    {/* Answer Box (inside the bottom 1/4 section) */}
+                    {showAnswer && (
+                        <div className="h-full p-4 overflow-y-auto">
+                            {currentCard.answer}
+                        </div>
+                    )}
                 </div>
             </div>
-            <div>
-                <div>
-                    <div onClick={() => handleStatusUpdate("correct")}>
+
+            {/* Buttons for navigation and status update */}
+            <div className="flex flex-row justify-center mt-10">
+                <div className="flex mr-64">
+                    <div
+                        onClick={() => handleStatusUpdate("correct")}
+                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
+                    >
                         Correct
                     </div>
-                    <div onClick={() => handleStatusUpdate("incorrect")}>
+                    <div
+                        onClick={() => handleStatusUpdate("incorrect")}
+                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
+                    >
                         Incorrect
                     </div>
                 </div>
-                <div>
+                <div className="flex ml-64">
                     <div
                         onClick={() => {
+                            setShowAnswer(false);
                             handleCardCycling("left");
                         }}
+                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
                     >
                         Previous
                     </div>
                     <div
                         onClick={() => {
+                            setShowAnswer(false);
                             handleCardCycling("right");
                         }}
+                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
                     >
                         Next
                     </div>

@@ -40,7 +40,7 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
             answer: formData.answerField,
             status: "unanswered",
         };
-        PostNewQuestion(data);
+        await PostNewQuestion(data);
         console.log("Form Data Submitted:", formData);
         const updatedQuestions = await UpdateQuestionsList();
         setQuestionList(updatedQuestions);
