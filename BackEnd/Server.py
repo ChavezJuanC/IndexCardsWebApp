@@ -17,9 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 async def ping_server():
     return {"Ping": "Ping"}
+
 
 ##Firs route should allow us to send a question and an answers +  ID and store it in a json file locally...
 @app.post("/new/question")
@@ -126,9 +128,10 @@ def delete_local_question(id: str):
 from fastapi import HTTPException
 import json
 
+
 @app.put("/local-questions/{id}/{status}")
 def update_question_status(id: str, status: str):
-    targetQuestion = None  
+    targetQuestion = None
 
     # Validate the status
     if status not in ALLOWED_STATUSES:
@@ -147,7 +150,7 @@ def update_question_status(id: str, status: str):
             if question["id"] == id:
                 question["status"] = status
                 targetQuestion = question
-                break 
+                break
 
         if targetQuestion is None:
             raise HTTPException(
@@ -169,3 +172,40 @@ def update_question_status(id: str, status: str):
             status_code=500,
             detail=f"Something went wrong while trying to update the status: {str(e)}",
         )
+
+
+# create a POST route that reads the current file...
+# for every obj in the file.. status = "unanswered"
+# Write list to file..
+# Return moded list
+@app.post("/local-questions/reset")
+def local_questions_status_reset():
+    try:  
+        with open("questions.json", mode="r", encoding="utf-8") as read_file:
+            question_data = json.load(read_file)
+            if not isinstance(question_data, list):
+                raise HTTPException(
+                    status_code=400, detail="Error Handling Data, Ensure Json is valid."
+            )
+
+        if len(question_data) > 0:
+            for question in question_data:
+                question["status"] = "unanswered"
+        
+        with open("questions.json", mode="w", encoding="utf-8") as write_file:
+            json.dump(question_data, write_file)
+
+        return question_data
+    
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="No questions file found.")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON format in the file.")
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Something went wrong while trying to reset the status for all questions: {str(e)}",
+        )
+            
+
+
