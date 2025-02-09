@@ -62,5 +62,26 @@ async function updateQuestionById(
     return data;
 }
 
-export { UpdateQuestionsList, serverUrl, PostNewQuestion, updateQuestionById };
+async function ResetQuestionsStatus(): Promise<QuestionAnswerType[]> {
+    const res: Response = await fetch(`${serverUrl}/local-questions/reset`, {
+        method: "POST",
+        headers: { "content-type": "applicaton/json" },
+    });
+
+    if (!res.ok) {
+        throw new Error(`HTTP error! status : ${res.status}`);
+    }
+
+    const data: QuestionAnswerType[] = await res.json();
+
+    return data;
+}
+
+export {
+    UpdateQuestionsList,
+    serverUrl,
+    PostNewQuestion,
+    updateQuestionById,
+    ResetQuestionsStatus,
+};
 export type { QuestionAnswerType };

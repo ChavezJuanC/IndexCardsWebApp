@@ -7,9 +7,16 @@ import {
 interface IndexCardsAreaProps {
     questions: QuestionAnswerType[];
     setQuestionList: Function;
+    trigerReset: boolean;
+    setTrigerReset: Function;
 }
 
-function IndexCardsArea({ questions, setQuestionList }: IndexCardsAreaProps) {
+function IndexCardsArea({
+    questions,
+    setQuestionList,
+    trigerReset,
+    setTrigerReset,
+}: IndexCardsAreaProps) {
     const [currentCard, setCurrentCard] = useState<QuestionAnswerType>({
         id: 0,
         question: "Please add some questions",
@@ -45,6 +52,18 @@ function IndexCardsArea({ questions, setQuestionList }: IndexCardsAreaProps) {
             console.error("Failed to update status:", error);
         }
     }
+
+    useEffect(() => {
+        if (trigerReset) {
+            setTrigerReset();
+
+            setCurrentCard(questions[0]);
+            setCurrentCardIndex(0);
+            setShowAnswer(false);
+            console.log("Questions Reset");
+            setTrigerReset(false);
+        }
+    }, [trigerReset]);
 
     function handleCardCycling(direction: string) {
         let newIndex = currentCardIndex;

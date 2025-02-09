@@ -1,6 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
-function HomeTopMenu() {
+interface HomeTopMenuProps {
+    handleResetQuestionsStatus: Function;
+    setTrigerReset: Function;
+}
+
+function HomeTopMenu({
+    handleResetQuestionsStatus,
+    setTrigerReset,
+}: HomeTopMenuProps) {
     const navigate = useNavigate();
     return (
         <div className="flex flex-row justify-between border-black border-3 h-10 rounded-md">
@@ -11,7 +19,10 @@ function HomeTopMenu() {
                 Edit Cards
             </div>
             <div
-                onClick={() => console.log("Restarting..")}
+                onClick={() => {
+                    handleResetQuestionsStatus();
+                    setTrigerReset(true);
+                }}
                 className="hover:cursor-pointer mx-20 text-xl font-semibold"
             >
                 Restart
