@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     PostNewQuestion,
     QuestionAnswerType,
@@ -20,6 +20,8 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
         questionField: "",
         answerField: "",
     });
+
+    const [formKey, setFormKey] = useState<number>(0); // Force re-render on submit
 
     const handletextareaChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>
@@ -44,10 +46,16 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
         console.log("Form Data Submitted:", formData);
         const updatedQuestions = await UpdateQuestionsList();
         setQuestionList(updatedQuestions);
+        setFormData({
+            questionField: "",
+            answerField: "",
+        });
+
+        setFormKey(formKey + 1);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} key={formKey}>
             <div>
                 <label htmlFor="questionField">Question:</label>
                 <textarea
@@ -55,8 +63,8 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
                     name="questionField"
                     value={formData.questionField}
                     onChange={handletextareaChange}
-                    className="border-1 border-black w-full resize-none"
-                    rows={2}
+                    className="border-1 border-black w-full resize-y p-2"
+                    rows={4}
                     required
                 />
             </div>
@@ -67,8 +75,8 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
                     name="answerField"
                     value={formData.answerField}
                     onChange={handletextareaChange}
-                    className="border-1 border-black w-full resize-none"
-                    rows={2}
+                    className="border-1 border-black w-full resize-y p-2"
+                    rows={4}
                     required
                 />
             </div>

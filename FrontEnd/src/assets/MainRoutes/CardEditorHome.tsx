@@ -23,7 +23,7 @@ function CardEditorHome() {
 
     return (
         <>
-            <div className="hidden xl:flex flex-col mt-22 h-full">
+            <div className="hidden xl:flex flex-col mt-18 h-full">
                 <div className="mx-auto w-3/4">
                     <CardEditorTopMenu />
                 </div>

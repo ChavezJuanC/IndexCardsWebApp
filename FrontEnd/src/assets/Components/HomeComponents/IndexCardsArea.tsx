@@ -94,18 +94,24 @@ function IndexCardsArea({
     }
 
     return (
-        <div className="mt-10">
-            <div className="mt-5 mb-15 text-2xl mx-auto text-center">
-                Status : {currentCard.status}
+        <div className="mt-10 h-screen">
+            <div className="mb-10 text-2xl mx-auto text-center">
+                {currentCard.status[0].toUpperCase() +
+                    currentCard.status.slice(1)}
             </div>
-            <div className="border-2 border-black w-1/2 mx-auto h-96 flex flex-col">
+            <div className="border-2 border-black w-1/2 mx-auto h-4/7 flex flex-col">
                 {/* Question Section (takes 3/4 of the card height) */}
                 <div className="flex-1 p-4 overflow-y-auto">
-                    {currentCard.question}
+                    {currentCard.question.split("\n").map((line, index) => (
+                        <span key={index}>
+                            {line}
+                            <br />
+                        </span>
+                    ))}
                 </div>
 
                 {/* Answer Section (takes 1/4 of the card height) */}
-                <div className="h-1/4 border-t-2 border-black relative">
+                <div className="h-1/3 border-t-2 border-black relative">
                     {/* Hide/Show Button (positioned above the answer box) */}
                     <div
                         onClick={() => setShowAnswer(!showAnswer)}
@@ -117,14 +123,21 @@ function IndexCardsArea({
                     {/* Answer Box (inside the bottom 1/4 section) */}
                     {showAnswer && (
                         <div className="h-full p-4 overflow-y-auto">
-                            {currentCard.answer}
+                            {currentCard.answer
+                                .split("\n")
+                                .map((line, index) => (
+                                    <span key={index}>
+                                        {line}
+                                        <br />
+                                    </span>
+                                ))}
                         </div>
                     )}
                 </div>
             </div>
 
             {/* Buttons for navigation and status update */}
-            <div className="flex flex-row justify-center mt-10">
+            <div className="flex flex-row justify-center mt-13">
                 <div className="flex mr-64">
                     <div
                         onClick={() => handleStatusUpdate("correct")}

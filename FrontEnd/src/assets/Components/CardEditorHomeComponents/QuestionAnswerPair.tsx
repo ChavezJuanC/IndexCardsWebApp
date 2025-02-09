@@ -43,11 +43,21 @@ function QuestionAnswerPair({
 
     return (
         <div className="my-4">
-            <div className="border-1 rounded-sm my-1 px-2 py-1">
-                Q: {question}
+            <div className="border-1 rounded-sm my-1 p-3">
+                {question.split("\n").map((line, index) => (
+                    <span key={index}>
+                        {line}
+                        <br />
+                    </span>
+                ))}
             </div>
-            <div className="border-1 rounded-sm my-1 px-2 py-1">
-                A: {answer}
+            <div className="border-1 rounded-sm my-1 p-3">
+                {answer.split("\n").map((line, index) => (
+                    <span key={index}>
+                        {line}
+                        <br />
+                    </span>
+                ))}
             </div>
             {/*Delete button logic pending!!*/}
             <div className="flex justify-end">
