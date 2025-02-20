@@ -11,10 +11,10 @@ function HomeTopMenu({
 }: HomeTopMenuProps) {
     const navigate = useNavigate();
     return (
-        <div className="flex flex-row justify-between border-black border-3 h-10 rounded-md">
+        <div className="flex flex-row justify-between bg-blue-600 text-white shadow-lg rounded-lg p-4">
             <div
                 onClick={() => navigate("/edit-cards/home")}
-                className="hover:cursor-pointer mx-20 text-xl font-semibold"
+                className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
             >
                 Edit Cards
             </div>
@@ -23,7 +23,7 @@ function HomeTopMenu({
                     handleResetQuestionsStatus();
                     setTrigerReset(true);
                 }}
-                className="hover:cursor-pointer mx-20 text-xl font-semibold"
+                className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
             >
                 Restart
             </div>

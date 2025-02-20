@@ -5,7 +5,6 @@ import {
     UpdateQuestionsList,
 } from "../../../HelperFunctions/ApiCalls";
 
-// Define the type for the form data
 interface FormData {
     questionField: string;
     answerField: string;
@@ -21,7 +20,7 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
         answerField: "",
     });
 
-    const [formKey, setFormKey] = useState<number>(0); // Force re-render on submit
+    const [formKey, setFormKey] = useState<number>(0);
 
     const handletextareaChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>
@@ -33,11 +32,10 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
         });
     };
 
-    // Handle form submission
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data: QuestionAnswerType = {
-            id: 0, // its okay to use 0, becuase the backend asigns the actual Id, for sure there is a better way to do this.. but this works now XD
+            id: 0,
             question: formData.questionField,
             answer: formData.answerField,
             status: "unanswered",
@@ -50,38 +48,44 @@ const NewCardForm = ({ setQuestionList }: CardFormProps) => {
             questionField: "",
             answerField: "",
         });
-
         setFormKey(formKey + 1);
     };
 
     return (
-        <form onSubmit={handleSubmit} key={formKey}>
-            <div>
-                <label htmlFor="questionField">Question:</label>
+        <form onSubmit={handleSubmit} key={formKey} className="bg-white shadow-lg rounded-lg p-6">
+            <div className="mb-4">
+                <label htmlFor="questionField" className="block text-blue-800 font-semibold mb-2">
+                    Question:
+                </label>
                 <textarea
                     id="questionField"
                     name="questionField"
                     value={formData.questionField}
                     onChange={handletextareaChange}
-                    className="border-1 border-black w-full resize-y p-2"
+                    className="border-2 border-blue-200 rounded-md w-full resize-y p-2 focus:border-blue-600 focus:outline-none"
                     rows={4}
                     required
                 />
             </div>
-            <div>
-                <label htmlFor="answerField">Answer:</label>
+            <div className="mb-4">
+                <label htmlFor="answerField" className="block text-blue-800 font-semibold mb-2">
+                    Answer:
+                </label>
                 <textarea
                     id="answerField"
                     name="answerField"
                     value={formData.answerField}
                     onChange={handletextareaChange}
-                    className="border-1 border-black w-full resize-y p-2"
+                    className="border-2 border-blue-200 rounded-md w-full resize-y p-2 focus:border-blue-600 focus:outline-none"
                     rows={4}
                     required
                 />
             </div>
             <div className="flex justify-end mt-2">
-                <button type="submit" className="border-2 rounded-md px-2">
+                <button
+                    type="submit"
+                    className="border-2 border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
+                >
                     New Question
                 </button>
             </div>

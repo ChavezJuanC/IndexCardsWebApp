@@ -4,33 +4,31 @@ function CardEditorTopMenu() {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <div className="flex flex-row justify-between border-black border-3 h-10 rounded-md">
+        <div className="flex flex-row justify-between bg-blue-600 text-white shadow-lg rounded-lg p-4">
+            <div
+                className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
+                onClick={() => navigate("/")}
+            >
+                Home
+            </div>
+            <div className="flex flex-row justify-between">
                 <div
-                    className="hover:cursor-pointer mx-10 text-xl font-semibold"
-                    onClick={() => navigate("/")}
+                    className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
+                    onClick={() => navigate("/edit-cards/byoq")}
                 >
-                    Home
+                    BYOQ
                 </div>
-                <div className="flex flex-row justify-between">
-                    <div
-                        className="hover:cursor-pointer mx-10 text-xl font-semibold"
-                        onClick={() => navigate("/edit-cards/byoq")}
-                    >
-                        BYOQ
-                    </div>
-                    <div
-                        className="hover:cursor-pointer mx-10 text-xl font-semibold"
-                        onClick={() => navigate("/edit-cards/load")}
-                    >
-                        Load
-                    </div>
-                    <div
-                        className="hover:cursor-pointer mx-10 text-xl font-semibold"
-                        onClick={() => navigate("/edit-cards/ai")}
-                    >
-                        AI
-                    </div>
+                <div
+                    className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
+                    onClick={() => navigate("/edit-cards/load")}
+                >
+                    Load
+                </div>
+                <div
+                    className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
+                    onClick={() => navigate("/edit-cards/ai")}
+                >
+                    AI
                 </div>
             </div>
         </div>

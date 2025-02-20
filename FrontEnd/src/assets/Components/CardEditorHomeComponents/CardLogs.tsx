@@ -12,23 +12,26 @@ interface CardLogsProps {
 }
 
 function CardLogs({ questions, setQuestionList }: CardLogsProps) {
-    const questionFeed = questions.map((q) => (
-        <QuestionAnswerPair
-            question={q.question}
-            answer={q.answer}
-            id={q.id}
-            setQuestionsList={setQuestionList}
-        />
-    ));
+    const questionFeed = questions
+        .map((q) => (
+            <QuestionAnswerPair
+                key={q.id}
+                question={q.question}
+                answer={q.answer}
+                id={q.id}
+                setQuestionsList={setQuestionList}
+            />
+        ))
+        .reverse();
 
     return (
-        <div>
-            <div className="">
-                <button className="border-2 rounded-md px-2">
+        <div className="bg-white shadow-lg rounded-lg p-6">
+            <div className="mb-4">
+                <button className="border-2 border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200">
                     Save Questions
                 </button>
             </div>
-            <div>{questionFeed}</div>
+            <div className="space-y-4">{questionFeed}</div>
         </div>
     );
 }
