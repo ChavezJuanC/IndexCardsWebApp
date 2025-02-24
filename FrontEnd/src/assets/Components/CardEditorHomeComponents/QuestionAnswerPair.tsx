@@ -14,7 +14,7 @@ function QuestionAnswerPair({
     setQuestionsList,
 }: QuestionAnswer) {
     const server: string = "http://127.0.0.1:8000";
-    //Delete by id from api here
+
     async function deleteQuestion(question_id: number) {
         try {
             const res = await fetch(
@@ -34,7 +34,6 @@ function QuestionAnswerPair({
             console.log("Question with id {0} deleted successfully", id);
 
             const newQuestionList: any[] = await UpdateQuestionsList();
-
             setQuestionsList(newQuestionList);
         } catch (error) {
             console.log(`Error: ${error}`);
@@ -42,8 +41,8 @@ function QuestionAnswerPair({
     }
 
     return (
-        <div className="my-4">
-            <div className="border-1 rounded-sm my-1 p-3">
+        <div className="my-4 bg-blue-50 shadow-md rounded-lg p-4">
+            <div className="border-2 border-blue-200 rounded-md my-2 p-3 bg-white">
                 {question.split("\n").map((line, index) => (
                     <span key={index}>
                         {line}
@@ -51,7 +50,7 @@ function QuestionAnswerPair({
                     </span>
                 ))}
             </div>
-            <div className="border-1 rounded-sm my-1 p-3">
+            <div className="border-2 border-blue-200 rounded-md my-2 p-3 bg-white">
                 {answer.split("\n").map((line, index) => (
                     <span key={index}>
                         {line}
@@ -59,10 +58,9 @@ function QuestionAnswerPair({
                     </span>
                 ))}
             </div>
-            {/*Delete button logic pending!!*/}
             <div className="flex justify-end">
                 <button
-                    className="border-2 px-2 rounded-sm"
+                    className="border-2 border-red-600 bg-red-600 text-white px-4 py-1 rounded-md hover:bg-red-700 transition-colors duration-200"
                     onClick={() => deleteQuestion(id)}
                 >
                     Delete

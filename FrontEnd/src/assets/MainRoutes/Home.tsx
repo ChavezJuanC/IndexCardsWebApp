@@ -13,8 +13,8 @@ function Home() {
 
     useEffect(() => {
         async function getLatestQuestions() {
-            const questoions = await UpdateQuestionsList();
-            setQuestionList(questoions);
+            const questions = await UpdateQuestionsList();
+            setQuestionList(questions);
         }
         getLatestQuestions();
     }, []);
@@ -26,7 +26,7 @@ function Home() {
 
     return (
         <>
-            <div className="hidden xl:flex flex-col mt-18 h-full">
+            <div className="hidden xl:flex flex-col mt-10 h-full">
                 <div className="mx-auto w-3/4">
                     <HomeTopMenu
                         handleResetQuestionsStatus={handleResetQuestionsStatus}
@@ -40,7 +40,9 @@ function Home() {
                     setTrigerReset={setTrigerReset}
                 />
             </div>
-            <div className="block xl:hidden">Please Extend Browser Size</div>
+            <div className="block xl:hidden p-6 text-center text-blue-800 bg-blue-50 rounded-lg shadow-lg mx-4 my-10">
+                Please extend your browser size for the best experience.
+            </div>
         </>
     );
 }

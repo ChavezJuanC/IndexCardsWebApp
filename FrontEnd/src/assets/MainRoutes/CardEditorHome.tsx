@@ -8,9 +8,7 @@ import {
 } from "../../HelperFunctions/ApiCalls";
 
 function CardEditorHome() {
-    const [questionsList, setQuestionsList] = useState<QuestionAnswerType[]>(
-        []
-    );
+    const [questionsList, setQuestionsList] = useState<QuestionAnswerType[]>([]);
 
     useEffect(() => {
         async function setQuestions() {
@@ -23,7 +21,7 @@ function CardEditorHome() {
 
     return (
         <>
-            <div className="hidden xl:flex flex-col mt-18 h-full">
+            <div className="hidden xl:flex flex-col mt-10 h-full">
                 <div className="mx-auto w-3/4">
                     <CardEditorTopMenu />
                 </div>
@@ -38,7 +36,9 @@ function CardEditorHome() {
                 </div>
                 <div className="h-12">{/*Spacer */}</div>
             </div>
-            <div className="block xl:hidden">Please Extend Browser Size</div>
+            <div className="block xl:hidden p-6 text-center text-blue-800 bg-blue-50 rounded-lg shadow-lg mx-4 my-10">
+                Please extend your browser size for the best experience.
+            </div>
         </>
     );
 }

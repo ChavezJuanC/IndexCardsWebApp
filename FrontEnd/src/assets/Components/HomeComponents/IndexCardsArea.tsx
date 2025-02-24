@@ -95,13 +95,13 @@ function IndexCardsArea({
 
     return (
         <div className="mt-10 h-screen">
-            <div className="mb-10 text-2xl mx-auto text-center">
+            <div className="mb-10 text-2xl mx-auto text-center text-blue-800 font-bold">
                 {currentCard.status[0].toUpperCase() +
                     currentCard.status.slice(1)}
             </div>
-            <div className="border-2 border-black w-1/2 mx-auto h-4/7 flex flex-col">
+            <div className="border-2 border-blue-600 bg-white shadow-lg rounded-lg w-1/2 mx-auto h-4/7 flex flex-col">
                 {/* Question Section (takes 3/4 of the card height) */}
-                <div className="flex-1 p-4 overflow-y-auto">
+                <div className="flex-1 p-6 overflow-y-auto text-blue-900">
                     {currentCard.question.split("\n").map((line, index) => (
                         <span key={index}>
                             {line}
@@ -111,18 +111,18 @@ function IndexCardsArea({
                 </div>
 
                 {/* Answer Section (takes 1/4 of the card height) */}
-                <div className="h-1/3 border-t-2 border-black relative">
+                <div className="h-1/3 border-t-2 border-blue-600 relative bg-blue-50 rounded-b-lg">
                     {/* Hide/Show Button (positioned above the answer box) */}
                     <div
                         onClick={() => setShowAnswer(!showAnswer)}
-                        className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-slate-50 border-2 border-black px-4 py-1 rounded-md cursor-pointer hover:bg-gray-100"
+                        className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white border-2 border-blue-600 px-4 py-1 rounded-md cursor-pointer hover:bg-blue-700 transition-colors duration-200"
                     >
                         {showAnswer ? "Hide Answer" : "Show Answer"}
                     </div>
 
                     {/* Answer Box (inside the bottom 1/4 section) */}
                     {showAnswer && (
-                        <div className="h-full p-4 overflow-y-auto">
+                        <div className="h-full p-4 overflow-y-auto text-blue-900">
                             {currentCard.answer
                                 .split("\n")
                                 .map((line, index) => (
@@ -137,17 +137,17 @@ function IndexCardsArea({
             </div>
 
             {/* Buttons for navigation and status update */}
-            <div className="flex flex-row justify-center mt-13">
+            <div className="flex flex-row justify-center mt-10">
                 <div className="flex mr-64">
                     <div
                         onClick={() => handleStatusUpdate("correct")}
-                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
+                        className="border-2 border-green-600 bg-green-600 text-white px-4 py-2 rounded-md mx-2 hover:cursor-pointer hover:bg-green-700 transition-colors duration-200"
                     >
                         Correct
                     </div>
                     <div
                         onClick={() => handleStatusUpdate("incorrect")}
-                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
+                        className="border-2 border-red-600 bg-red-600 text-white px-4 py-2 rounded-md mx-2 hover:cursor-pointer hover:bg-red-700 transition-colors duration-200"
                     >
                         Incorrect
                     </div>
@@ -158,7 +158,7 @@ function IndexCardsArea({
                             setShowAnswer(false);
                             handleCardCycling("left");
                         }}
-                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
+                        className="border-2 border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md mx-2 hover:cursor-pointer hover:bg-blue-700 transition-colors duration-200"
                     >
                         Previous
                     </div>
@@ -167,7 +167,7 @@ function IndexCardsArea({
                             setShowAnswer(false);
                             handleCardCycling("right");
                         }}
-                        className="border-2 px-2 py-0.5 rounded-md mx-2 hover:cursor-pointer"
+                        className="border-2 border-blue-600 bg-blue-600 text-white px-4 py-2 rounded-md mx-2 hover:cursor-pointer hover:bg-blue-700 transition-colors duration-200"
                     >
                         Next
                     </div>
