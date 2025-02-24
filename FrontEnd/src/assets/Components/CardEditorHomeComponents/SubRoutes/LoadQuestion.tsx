@@ -4,18 +4,16 @@ import {
 } from "../../../../HelperFunctions/ApiCalls";
 
 function LoadQuestion() {
-
     async function handleQuestionsUpdate(data: QuestionAnswerType[]) {
         await ReplaceAllQuestions(data);
     }
 
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-
-        let parsedData : QuestionAnswerType[];
+        let parsedData: QuestionAnswerType[];
 
         if (event.target.files != null) {
             const file = event.target.files[0];
-            
+
             if (file.type == "application/json") {
                 const reader = new FileReader();
                 reader.onload = async (e) => {
@@ -24,9 +22,7 @@ function LoadQuestion() {
                             e.target != null &&
                             typeof e.target.result === "string"
                         ) {
-                            parsedData = JSON.parse(
-                                e.target.result
-                            );
+                            parsedData = JSON.parse(e.target.result);
                             console.log(parsedData);
                             await handleQuestionsUpdate(parsedData);
                         }
@@ -36,28 +32,30 @@ function LoadQuestion() {
                 };
 
                 reader.readAsText(file);
-
             } else {
                 alert("Please choose a valid json file");
             }
-
         }
     }
 
     return (
         //Maybe this should read the questions file, validate its structure(else return error..), paste it to the main file...
-
-        <div>
-            <div>load Questions</div>
-            <div>
-                <input
-                    type="file"
-                    onChange={(e) => {
-                        handleFileChange(e);
-                    }}
-                />
+        <>
+            <div className="hidden xl:flex">
+                <div>load Questions</div>
+                <div>
+                    <input
+                        type="file"
+                        onChange={(e) => {
+                            handleFileChange(e);
+                        }}
+                    />
+                </div>
             </div>
-        </div>
+            <div className="block xl:hidden p-6 text-center text-blue-800 bg-blue-50 rounded-lg shadow-lg mx-4 my-10">
+                Please extend your browser size for the best experience.
+            </div>
+        </>
     );
 }
 

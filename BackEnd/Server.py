@@ -128,18 +128,17 @@ def delete_local_question(id: str):
 from fastapi import HTTPException
 import json
 
-
 @app.put("/local-questions/{id}/{status}")
 def update_question_status(id: str, status: str):
-    targetQuestion = None
 
+    targetQuestion = None
     # Validate the status
     if status not in ALLOWED_STATUSES:
         raise HTTPException(
             status_code=400,
             detail=f"Invalid status. Allowed values are: {ALLOWED_STATUSES}",
         )
-
+    
     try:
         with open("questions.json", mode="r", encoding="utf-8") as read_file:
             question_data = json.load(read_file)
@@ -174,10 +173,7 @@ def update_question_status(id: str, status: str):
         )
 
 
-# create a POST route that reads the current file...
-# for every obj in the file.. status = "unanswered"
-# Write list to file..
-# Return moded list
+# This route will reset the values for the answered prop of all objs in list
 @app.post("/local-questions/reset")
 def local_questions_status_reset():
     try:  
@@ -206,6 +202,27 @@ def local_questions_status_reset():
             status_code=500,
             detail=f"Something went wrong while trying to reset the status for all questions: {str(e)}",
         )
+
+# This route will raplace the entire questions file with a copy of another file
+@app.put("/local-questions/replace")
+def local_questions_replace(questions: list[QuestionModel.QuestionModel]):
+    print(questions)
+    try:
+        with open("questions.json", mode="w", encoding="utf-8") as write_file:
+            questions_data = [question.to_dict() for question in questions]
+            ##convert ids back to string since to_dict() might turn them into ints
+            for question in questions_data:
+                question["id"] = str(question["id"])
+            json.dump(questions_data, write_file, ensure_ascii=False, indent=4)
             
+        return questions_data
 
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON format in the file.")
+    except Exception as e:
+        raise HTTPException(
+            status_code=400, detail=f"Error : {str(e)}"
+        )
+        
 
+    #overide existing file with new questions..
