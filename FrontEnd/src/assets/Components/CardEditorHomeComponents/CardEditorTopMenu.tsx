@@ -14,21 +14,15 @@ function CardEditorTopMenu() {
             <div className="flex flex-row justify-between">
                 <div
                     className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
-                    onClick={() => navigate("/edit-cards/byoq")}
-                >
-                    BYOQ
-                </div>
-                <div
-                    className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
                     onClick={() => navigate("/edit-cards/load")}
                 >
-                    Load
+                    Upload Questions
                 </div>
                 <div
                     className="hover:cursor-pointer mx-4 text-lg font-semibold hover:text-blue-200 transition-colors duration-200"
                     onClick={() => navigate("/edit-cards/ai")}
                 >
-                    AI
+                    Genarete with AI
                 </div>
             </div>
         </div>

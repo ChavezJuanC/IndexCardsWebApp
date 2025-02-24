@@ -77,11 +77,30 @@ async function ResetQuestionsStatus(): Promise<QuestionAnswerType[]> {
     return data;
 }
 
+async function ReplaceAllQuestions(
+    questionsList: QuestionAnswerType[]
+): Promise<QuestionAnswerType[]> {
+    const res: Response = await fetch(`${serverUrl}/local-questions/replace`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(questionsList),
+    });
+
+    if (!res.ok) {
+        throw new Error(`HTTP error :  status : ${res.status}`);
+    }
+
+    const data: QuestionAnswerType[] = await res.json();
+
+    return data;
+}
+
 export {
     UpdateQuestionsList,
     serverUrl,
     PostNewQuestion,
     updateQuestionById,
     ResetQuestionsStatus,
+    ReplaceAllQuestions
 };
 export type { QuestionAnswerType };

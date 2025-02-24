@@ -40,6 +40,8 @@ function IndexCardsArea({
                 newState
             );
 
+            console.log("question updated")
+
             setCurrentCard(updatedQuestion);
 
             const newList = questions.map((element) =>
