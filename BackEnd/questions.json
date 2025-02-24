@@ -1,1 +1,14 @@
-[{"id": "20250209130743", "question": "Relacione el tipo de conquista con los acontecimientos que le correstponden.\n\n1. Espiritual\n2. Material\n\nA. Expediciones de Hernan Cortez\nB. Procesos misionales pacificos\nC. Organizacion de concillios provinciales\nD. Consolidacion de la encomienda", "answer": "1. Espiritual - B. Procesos misionales pacificos Y - C. Organizacion de concillios provinciales\n2. Material - A. Expediciones de Hernan Cortez Y - D. Consolidacion de la encomienda", "status": "unanswered"}, {"id": "20250209131032", "question": "Identifique la caracteristica que corresponde al periodo de el virreinato.\n\nA - La base de la estratificacion fueron los estamentos\nB - La sociedad estaba dividida entre gobernantes, nobles, y comunes\nC - La sociedad estaba basade en el corporativismo , el cual genero paz\nD - La encomienda fue la base de la jerarquizacion social", "answer": "D - La encomienda fue la base de la jerarquizacion social", "status": "unanswered"}]
+[
+    {
+        "id": "20250209130743",
+        "question": "Relacione el tipo de conquista con los acontecimientos que le correstponden.\n\n1. Espiritual\n2. Material\n\nA. Expediciones de Hernan Cortez\nB. Procesos misionales pacificos\nC. Organizacion de concillios provinciales\nD. Consolidacion de la encomienda",
+        "answer": "1. Espiritual - B. Procesos misionales pacificos Y - C. Organizacion de concillios provinciales\n2. Material - A. Expediciones de Hernan Cortez Y - D. Consolidacion de la encomienda",
+        "status": "incorrect"
+    },
+    {
+        "id": "20250209131032",
+        "question": "Identifique la caracteristica que corresponde al periodo de el virreinato.\n\nA - La base de la estratificacion fueron los estamentos\nB - La sociedad estaba dividida entre gobernantes, nobles, y comunes\nC - La sociedad estaba basade en el corporativismo , el cual genero paz\nD - La encomienda fue la base de la jerarquizacion social",
+        "answer": "D - La encomienda fue la base de la jerarquizacion social",
+        "status": "correct"
+    }
+]
