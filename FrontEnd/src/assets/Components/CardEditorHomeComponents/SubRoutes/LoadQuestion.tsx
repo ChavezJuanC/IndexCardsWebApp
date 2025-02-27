@@ -51,15 +51,11 @@ function LoadQuestion() {
                 Back
             </div>
 
-            {/* Main Content */}
             <div className="hidden xl:flex mt-10 justify-center">
                 <div className="border-2 border-blue-200 bg-white shadow-lg rounded-lg p-6 w-96">
-                    {/* Title */}
                     <div className="text-blue-800 text-xl font-bold mb-4">
                         Upload Your Own Questions
                     </div>
-
-                    {/* File Input Section */}
                     <div className="flex items-center space-x-4">
                         <div className="text-blue-700">File:</div>
                         <div>
@@ -71,9 +67,8 @@ function LoadQuestion() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            {/* Responsive Message */}
 
-            {/* Responsive Message */}
             <div className="block xl:hidden p-6 text-center text-blue-800 bg-blue-50 rounded-lg shadow-lg mx-4 my-10">
                 Please extend your browser size for the best experience.
             </div>
@@ -83,8 +78,3 @@ function LoadQuestion() {
 
 export default LoadQuestion;
 
-//Create. a save questions feature that lets you save your current questions as json files for later use.
-
-//THOUGHTS... for the AI have it generate the json with a set structure... show questions.. give option to save questions to file... replace current file info with this info and bang!!!
-
-//Delete unecessary routes.. AI style and ba
