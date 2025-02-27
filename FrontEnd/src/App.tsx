@@ -4,6 +4,7 @@ import Home from "./assets/MainRoutes/Home";
 import CardEditorHome from "./assets/MainRoutes/CardEditorHome";
 import LoadQuestion from "./assets/Components/CardEditorHomeComponents/SubRoutes/LoadQuestion";
 import AIQuestions from "./assets/Components/CardEditorHomeComponents/SubRoutes/AIQuestions";
+import SaveQuestions from "./assets/Components/CardEditorHomeComponents/SubRoutes/SaveQuestions";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/edit-cards/home" element={<CardEditorHome />} />
                 <Route path="/edit-cards/load" element={<LoadQuestion />} />
                 <Route path="/edit-cards/ai" element={<AIQuestions />} />
+                <Route path="/savenewquestions" element={<SaveQuestions />} />
             </Routes>
         </Router>
     );
