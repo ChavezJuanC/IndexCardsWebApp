@@ -1,74 +1,32 @@
 [
     {
-        "id": "20250224192359",
-        "question": "Relacione cada función del lenguaje con el enunciado correspondiente.\n\nFunciones:\n1.Metalingüística\n2.Apelativa\n3.Emotiva\n\nEnunciados:\na) Quiero saber poesía para poder enamorarte.\nb) La metáfora es la puesta en tensión de dos significados.\nc) ¡Hola! ¿Cómo estás?\nd) Por favor, lee el poema con la entonación adecuada.",
-        "answer": "1b, 2d, 3a",
+        "id": "854710",
+        "question": "¿Cuál es el proceso por el cual los vinos pueden ser etiquetados con una denominación de origen?",
+        "answer": "Reglamento del Consejo",
         "status": "unanswered"
     },
     {
-        "id": "20250224193139",
-        "question": "Seleccione las palabras que deben tener tilde en el texto.\n\nLa perdida de mi mama me tiene sumido en un dolor abismal. Anque este seguro seguro de volver a encontrarla, se que mi sufrimineto es continuo.\n\n1. Perdida\n2.Sumido\n3. Abismal\n4. Este\n5. Se\n6. Continuo",
-        "answer": "1, 4, 6",
+        "id": "421319",
+        "question": "¿Cuál es la región vinícola más grande del mundo?",
+        "answer": "El Douro en Portugal, pero también la región más famosa del mundo para el vino es Borgoña en Francia.",
         "status": "unanswered"
     },
     {
-        "id": "20250224193602",
-        "question": "Asocie los tipos de relación semántica con las palabras correspondientes.\n\nTipos:\n1. Antonimia\n2. Homonimia\n3. Paronimia\n\nPalabras:\na) Perro, pero\nb) Perspicaz, sagaz\nc) Diáfano, turbio\nd) Caso, cazo",
-        "answer": "1c, 2d, 3a",
+        "id": "854321",
+        "question": "¿Cuál es el vino más conocido por su producción en la región de Borgoña, Francia?",
+        "answer": "Chablis",
         "status": "unanswered"
     },
     {
-        "id": "20250224194124",
-        "question": "Identifique las características de una nota informativa.\n\na) Presenta hechos de interés social, proporciona datos de forma objetiva, aborda acontecimientos de actualidad.\nb) Combina la información con las opiniones del autor, narra cronológicamente los acontecimientos, es un texto breve.\nc) Trata un tema específico investigado ampliamente, proporciona datos de forma objetiva, su estilo es ameno.\nd) Aborda acontecimientos de actualidad, sigue una metodología, narra cronológicamente los acontecimientos.",
-        "answer": "a) Presenta hechos de interés social, proporciona datos de forma objetiva, aborda acontecimientos de actualidad.",
+        "id": "219854",
+        "question": "¿Cuál es el nombre del proceso por el cual los vinos se clasifican según su calidad?",
+        "answer": "Clasificación de origen",
         "status": "unanswered"
     },
     {
-        "id": "20250224195318",
-        "question": "Relacione cada tipo de ensayo con el fragmento que le corresponde.\n\nTipos de ensayo:\n1. Filosófico\n2. Literario\n3. Científico\n\nFragmentos:\na) A medida que el cambio climático acelera el paso, muchos investigadores temen que ya nos encontremos en un periodo de mutación irreversible y descontrolado. Con este telón de fondo, la ignorancia de la ciudadanía estadounidense sobre el calentamiento global destaca como una crítica contra los medios de comunicación estadounidenses.\n\nb) El hombre, tal como lo concibe el existencialista, si no es definible, es porque empieza por no ser nada. Solo será después, y será tal como se haya hecho. Así pues, no hay naturaleza humana.\n\nc) La poesía nos hace tocar lo impalpable [...] el testimonio poético nos revela otro mundo dentro de este mundo, el mundo otro que este mundo. Los sentidos [...] se convierten en servidores de la imaginación y nos hacen oír lo inaudito y ver lo imperceptible. ¿No es esto, por lo demás, lo que ocurre en el sueño y en el encuentro ético?",
-        "answer": "1b, 2c, 3a",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250224200119",
-        "question": "Un estudiante debe entregar un ensayo para la clase de lectura y redacción.\nOrdene los pasos que debe seguir para escribirlo.\n\n1. Delimitar el tema\n2. Corregir la redacción\n3. Investigar la bibliografía\n4. Elegir el tema\n5. Redactar el ensayo",
-        "answer": "4, 1, 3, 5, 2",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250224200536",
-        "question": "Elige las funciones que corresponden a un sistema operativo.\n\n1. Ejecuta tareas específicas.\n2. Ejecuta las tareas de manera simultánea.\n3. Gestiona los recursos de la computadora.\n4. Interpreta los documentos en HTML o PHP.\n5. Organiza la información en archivos y carpetas.",
-        "answer": "2,3,5",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250224200854",
-        "question": "Relacione el operador de búsqueda con su función.\n\nOperadores:\n1. *\n2. \"\"\n3. OR\n\nFunciones:\na) Excluye u omite palabras en la búsqueda\nb) Actúa como comodín cuando no se conoce una palabra\nc) Busca las palabras exactas o la expresión literal\nd) Muestra páginas que contengan un término u otro",
-        "answer": "1b, 2c, 3d",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250224201310",
-        "question": "Relacione el tipo de software con su función.\n\nTipo de Software:\n\n1. Procesador de textos\n2. Hoja de cálculo\n3. Presentador electrónico\n\nFunción:\na) Aplica filtros\nb) Manejar intervalos\nc) Crear tabla de contenido\nd) Aplicar transiciones\ne) Combinar correspondencia\nf) Aplicar formato condicional",
-        "answer": "1ce, 2af, 3bd",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250224201611",
-        "question": "Ana necesita redactar un ensayo en un procesador de textos. El trabajo debe tener como criterio incluir una portada de alguna plantilla predefinida y aplicar una sangría en la primera línea del texto.\n\nSeleccione los grupos de comandos que permiten cumplir con los criterios.\na) Títulos\nb) Párrafos\nc) Páginas\nd) Estilos",
-        "answer": "b,c",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250224202240",
-        "question": "El profesor de Informática le pide a Pedro que prepare una exposición de su proyecto final, para lo cual se deberá apoyar en una presentación electrónica. En la presentación, Pedro ya incluyó la información textual y las imágenes. De acuerdo con los requerimientos solicitados por el profesor, le falta agregar un diseño de los predeterminados que tiene el programa, ponerle efectos al cambio de una diapositiva a otra y que cada una dure 1 minuto.\n\nSeleccione los grupos de comandos que Pedro debe utilizar para completar la presentación.\na) Diapositivas\nb) Temas\nc) Transición a esta diapositiva\nd) Animación\ne) Intervalos",
-        "answer": "b,c,e",
-        "status": "unanswered"
-    },
-    {
-        "id": "20250226193012",
-        "question": "edited",
-        "answer": "edited",
+        "id": "834219",
+        "question": "¿Cuál es el nombre del vino más conocido por su producción en Francia?",
+        "answer": "Burdeos",
         "status": "unanswered"
     }
 ]

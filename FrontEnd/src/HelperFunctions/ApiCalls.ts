@@ -27,8 +27,7 @@ async function PostNewQuestion(question: QuestionAnswerType): Promise<string> {
     const res: Response = await fetch(`${serverUrl}/new/question`, {
         method: "POST",
         headers: {
-            "content-type": "application/json",
-            //how to include body here??
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(question),
     });
@@ -49,7 +48,7 @@ async function updateQuestionById(
         `${serverUrl}/local-questions/${id}/${status}`,
         {
             method: "PUT",
-            headers: { "content-type": "application/json" },
+            headers: { "Content-Type": "application/json" },
         }
     );
 
@@ -65,7 +64,7 @@ async function updateQuestionById(
 async function ResetQuestionsStatus(): Promise<QuestionAnswerType[]> {
     const res: Response = await fetch(`${serverUrl}/local-questions/reset`, {
         method: "POST",
-        headers: { "content-type": "applicaton/json" },
+        headers: { "Content-Type": "applicaton/json" },
     });
 
     if (!res.ok) {
@@ -80,9 +79,10 @@ async function ResetQuestionsStatus(): Promise<QuestionAnswerType[]> {
 async function ReplaceAllQuestions(
     questionsList: QuestionAnswerType[]
 ): Promise<QuestionAnswerType[]> {
+    console.log(questionsList);
     const res: Response = await fetch(`${serverUrl}/local-questions/replace`, {
         method: "PUT",
-        headers: { "content-type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(questionsList),
     });
 
@@ -101,6 +101,6 @@ export {
     PostNewQuestion,
     updateQuestionById,
     ResetQuestionsStatus,
-    ReplaceAllQuestions
+    ReplaceAllQuestions,
 };
 export type { QuestionAnswerType };
