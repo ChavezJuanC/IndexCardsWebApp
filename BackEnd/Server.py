@@ -13,7 +13,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],    
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -34,7 +34,9 @@ async def new_question(question: QuestionModel.QuestionModel):
 
     # Load existing data safely
     try:
-        with open("../FrontEnd/public/questions.json", mode="r", encoding="utf-8") as read_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="r", encoding="utf-8"
+        ) as read_file:
             questions_data = json.load(read_file)
             if not isinstance(questions_data, list):
                 questions_data = []
@@ -44,7 +46,9 @@ async def new_question(question: QuestionModel.QuestionModel):
 
     questions_data.append(question.to_dict())
 
-    with open("../FrontEnd/public/questions.json", mode="w", encoding="utf-8") as write_file:
+    with open(
+        "../FrontEnd/public/questions.json", mode="w", encoding="utf-8"
+    ) as write_file:
         json.dump(questions_data, write_file, ensure_ascii=False, indent=4)
 
     return {"Message": "New Question Added"}
@@ -54,7 +58,9 @@ async def new_question(question: QuestionModel.QuestionModel):
 @app.get("/all-local-questions")
 def get_all_local_questions():
     try:
-        with open("../FrontEnd/public/questions.json", mode="r", encoding="utf-8") as read_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="r", encoding="utf-8"
+        ) as read_file:
             question_data = json.load(read_file)
             if not isinstance(question_data, list):
                 question_data = []
@@ -69,7 +75,9 @@ def get_all_local_questions():
 @app.delete("/all-local-questions")
 def delete_all_local_questions():
     try:
-        with open("../FrontEnd/public/questions.json", mode="w", encoding="utf-8") as write_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="w", encoding="utf-8"
+        ) as write_file:
             json.dump("[]", write_file)
 
             return {"Message": "Question list was cleared"}
@@ -89,7 +97,9 @@ def delete_all_local_questions():
 @app.delete("/local-questions/{id}")
 def delete_local_question(id: str):
     try:
-        with open("../FrontEnd/public/questions.json", mode="r", encoding="utf-8") as read_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="r", encoding="utf-8"
+        ) as read_file:
             question_data = json.load(read_file)
             if not isinstance(question_data, list):
                 raise HTTPException(
@@ -104,7 +114,9 @@ def delete_local_question(id: str):
         question_data = [item for item in question_data if item.get("id") != id]
 
         if len(question_data) != starting_length:
-            with open("../FrontEnd/public/questions.json", mode="w", encoding="utf-8") as write_file:
+            with open(
+                "../FrontEnd/public/questions.json", mode="w", encoding="utf-8"
+            ) as write_file:
                 json.dump(question_data, write_file)
 
             return {"Message": f"Question with id ({id}) has been deleted."}
@@ -128,6 +140,7 @@ def delete_local_question(id: str):
 from fastapi import HTTPException
 import json
 
+
 @app.put("/local-questions/{id}/{status}")
 def update_question_status(id: str, status: str):
 
@@ -138,9 +151,11 @@ def update_question_status(id: str, status: str):
             status_code=400,
             detail=f"Invalid status. Allowed values are: {ALLOWED_STATUSES}",
         )
-    
+
     try:
-        with open("../FrontEnd/public/questions.json", mode="r", encoding="utf-8") as read_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="r", encoding="utf-8"
+        ) as read_file:
             question_data = json.load(read_file)
             if not isinstance(question_data, list):
                 question_data = []
@@ -157,7 +172,9 @@ def update_question_status(id: str, status: str):
                 detail=f"Question with id ({id}) not found.",
             )
 
-        with open("../FrontEnd/public/questions.json", mode="w", encoding="utf-8") as write_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="w", encoding="utf-8"
+        ) as write_file:
             json.dump(question_data, write_file)
 
         return targetQuestion
@@ -176,23 +193,27 @@ def update_question_status(id: str, status: str):
 # This route will reset the values for the answered prop of all objs in list
 @app.post("/local-questions/reset")
 def local_questions_status_reset():
-    try:  
-        with open("../FrontEnd/public/questions.json", mode="r", encoding="utf-8") as read_file:
+    try:
+        with open(
+            "../FrontEnd/public/questions.json", mode="r", encoding="utf-8"
+        ) as read_file:
             question_data = json.load(read_file)
             if not isinstance(question_data, list):
                 raise HTTPException(
                     status_code=400, detail="Error Handling Data, Ensure Json is valid."
-            )
+                )
 
         if len(question_data) > 0:
             for question in question_data:
                 question["status"] = "unanswered"
-        
-        with open("../FrontEnd/public/questions.json", mode="w", encoding="utf-8") as write_file:
+
+        with open(
+            "../FrontEnd/public/questions.json", mode="w", encoding="utf-8"
+        ) as write_file:
             json.dump(question_data, write_file)
 
         return question_data
-    
+
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="No questions file found.")
     except json.JSONDecodeError:
@@ -203,26 +224,27 @@ def local_questions_status_reset():
             detail=f"Something went wrong while trying to reset the status for all questions: {str(e)}",
         )
 
+
 # This route will raplace the entire questions file with a copy of another file
 @app.put("/local-questions/replace")
 def local_questions_replace(questions: list[QuestionModel.QuestionModel]):
     print(questions)
     try:
-        with open("../FrontEnd/public/questions.json", mode="w", encoding="utf-8") as write_file:
+        with open(
+            "../FrontEnd/public/questions.json", mode="w", encoding="utf-8"
+        ) as write_file:
             questions_data = [question.to_dict() for question in questions]
             ##convert ids back to string since to_dict() might turn them into ints
             for question in questions_data:
                 question["id"] = str(question["id"])
             json.dump(questions_data, write_file, ensure_ascii=False, indent=4)
-            
+
         return questions_data
 
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid JSON format in the file.")
     except Exception as e:
-        raise HTTPException(
-            status_code=400, detail=f"Error : {str(e)}"
-        )
-        
+        raise HTTPException(status_code=400, detail=f"Error : {str(e)}")
 
-    #overide existing file with new questions..
+    # overide existing file with new questions..
+

@@ -1,3 +1,5 @@
+import { QuestionAnswerType } from "./ApiCalls";
+
 async function requestJsonQuestions(
     theme: string,
     difficulty: number,
@@ -31,6 +33,7 @@ Dificultad: ${difficulty}/5.
 - NO incluyas opciones múltiples.
 - Asegúrate de que la pregunta sea clara y la respuesta sea precisa.
 - Simpre deja el "status" como "unanswered".
+- Siempre asegurate de contestar en ${language}
 
 Genera la pregunta ahora.`,
         stream: false,
@@ -94,7 +97,11 @@ async function generateQuestions(
     for (let i = 0; i < questionCount; i++) {
         //generate AI interaction
         AIResponse = await requestJsonQuestions(theme, difficulty, language);
-        questionsList.push(JSON.parse(AIResponse.trim()));
+        const parsedResponse: QuestionAnswerType = JSON.parse(
+            AIResponse.trim()
+        );
+
+        questionsList.push(parsedResponse);
         //if we need to, we can validate the json here!!
     }
 
@@ -102,3 +109,7 @@ async function generateQuestions(
 }
 
 export { generateQuestions };
+
+//The AI is having issues switching between languages with the same prompt.. maybe make different promps in different languages and dynamically feed it the prompt..
+// add a new model for AI generated json.. {questions: "string", answers<4>[answer: "string"], correctAnswer: "string", status: "unanswered"} after than use a function to append
+// question + answers with a new line char and have that be the output object..
