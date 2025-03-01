@@ -1,5 +1,16 @@
 import { QuestionAnswerType } from "./ApiCalls";
 
+interface AIMultipleChoiceQuestions {
+    id: string;
+    question: string;
+    optionA: string;
+    optionB: string;
+    optionC: string;
+    optionD: string;
+    answer: string;
+    status: string;
+}
+
 async function requestJsonQuestions(
     theme: string,
     difficulty: number,
@@ -9,56 +20,87 @@ async function requestJsonQuestions(
     const model = "llama3.1:latest";
     const data = {
         model: model,
-        prompt: `Genera una pregunta estilo examen con el tema: "${theme}".
-Idioma: "${language}".
-Dificultad: ${difficulty}/5.
-
-### Formato de salida:
-- Cada pregunta debe tener un ID único de 6 dígitos evita combinaciones tontas y simples.
-- La pregunta debe ser clara y concisa (por ejemplo, "¿Cuál es la capital de Francia?").
-- Debe proporcionar una respuesta correcta para cada pregunta (por ejemplo, "París").
-- Devuelve todas las preguntas en un arreglo de objetos.
-
-### Ejemplo de salida:
-
-  {
-    "id": "482913",
-    "question": "¿Cuál es la capital de Francia?",
-    "answer": "París"
-    "status": "unanswered"
-  }
-
-
-### Reglas:
-- NO incluyas opciones múltiples.
-- Asegúrate de que la pregunta sea clara y la respuesta sea precisa.
-- Simpre deja el "status" como "unanswered".
-- Siempre asegurate de contestar en ${language}
-
-Genera la pregunta ahora.`,
+        prompt: `Genera una pregunta de tipo examen sobre el tema: "${theme}".
+    Idioma: "${language}".
+    Dificultad: ${difficulty}/5.
+    
+    ### Formato de salida:
+    - Cada pregunta debe tener un ID único de 6 dígitos (evita combinaciones simples como "123456" o "000001").
+    - La pregunta debe ser clara, concisa y directa (por ejemplo, "¿Cuál es la capital de Francia?").
+    - Proporciona cuatro opciones (A, B, C, D) donde solo una sea correcta.
+    - Especifica la opción correcta en el campo "answer" con el formato "<letra>)<respuesta>".
+    - Devuelve todas las preguntas en un arreglo de objetos.
+    
+    ### Ejemplo de salida:
+    
+      {
+        "id": "482913",
+        "question": "¿Cuál es la capital de Francia?",
+        "optionA": "A) CDMX",
+        "optionB": "B) Washington DC",
+        "optionC": "C) Tokyo",
+        "optionD": "D) París",
+        "answer": "D) París",
+      }
+    
+    ### Reglas:
+    1. Genera una pregunta relevante y adecuada al nivel de dificultad proporcionado.
+    2. No utilices opciones ambiguas o confusas.
+    3. Asegúrate de que solo una opción sea correcta.
+    4. Mantén siempre el campo "status" como "unanswered".
+    5. Devuelve la respuesta en el idioma especificado: ${language}.
+    
+    Genera la pregunta ahora.
+    `,
         stream: false,
         format: {
             type: "object",
             properties: {
                 id: {
                     type: "string",
-                    description: "Un número único de 6 dígitos como cadena.",
+                    description:
+                        "Un identificador único de 6 dígitos como cadena.",
                 },
                 question: {
                     type: "string",
                     description:
-                        "Una pregunta clara con una única respuesta precisa.",
+                        "Una pregunta clara y concisa con una única respuesta correcta.",
+                },
+                optionA: {
+                    type: "string",
+                    description:
+                        "Opción de respuesta A en formato 'A) <texto>'.",
+                },
+                optionB: {
+                    type: "string",
+                    description:
+                        "Opción de respuesta B en formato 'B) <texto>'.",
+                },
+                optionC: {
+                    type: "string",
+                    description:
+                        "Opción de respuesta C en formato 'C) <texto>'.",
+                },
+                optionD: {
+                    type: "string",
+                    description:
+                        "Opción de respuesta D en formato 'D) <texto>'.",
                 },
                 answer: {
                     type: "string",
-                    description: "La respuesta correcta a la pregunta.",
-                },
-                status: {
-                    type: "string",
-                    description: "unanswered",
+                    description:
+                        "La opción correcta en formato '<letra>)<respuesta>'.",
                 },
             },
-            required: ["id", "question", "answer", "status"],
+            required: [
+                "id",
+                "question",
+                "optionA",
+                "optionB",
+                "optionC",
+                "optionD",
+                "answer",
+            ],
         },
     };
 
@@ -97,19 +139,41 @@ async function generateQuestions(
     for (let i = 0; i < questionCount; i++) {
         //generate AI interaction
         AIResponse = await requestJsonQuestions(theme, difficulty, language);
-        const parsedResponse: QuestionAnswerType = JSON.parse(
+        const parsedResponse: AIMultipleChoiceQuestions = JSON.parse(
             AIResponse.trim()
         );
 
-        questionsList.push(parsedResponse);
-        //if we need to, we can validate the json here!!
+        questionsList.push(convertIntoQuestionAnswerFormat(parsedResponse));
     }
 
     return questionsList;
 }
 
-export { generateQuestions };
+//This function formats all the answer options properties into the question propterty to mantain API structure. ##AI was having a hard time generating the json in the required API format
+function convertIntoQuestionAnswerFormat(
+    AIQuestion: AIMultipleChoiceQuestions
+): QuestionAnswerType {
+    const answerProperties: string[] = [
+        AIQuestion.optionA,
+        AIQuestion.optionB,
+        AIQuestion.optionC,
+        AIQuestion.optionD,
+    ];
 
-//The AI is having issues switching between languages with the same prompt.. maybe make different promps in different languages and dynamically feed it the prompt..
-// add a new model for AI generated json.. {questions: "string", answers<4>[answer: "string"], correctAnswer: "string", status: "unanswered"} after than use a function to append
-// question + answers with a new line char and have that be the output object..
+    let answerString: string = "";
+
+    for (let i = 0; i < answerProperties.length; i++) {
+        answerString += `\n${answerProperties[i]}`;
+    }
+
+    const formattedQuestionAnswer: QuestionAnswerType = {
+        id: parseInt(AIQuestion.id, 10),
+        question: `${AIQuestion.question}\n${answerString}`,
+        answer: AIQuestion.answer,
+        status: "unanswered",
+    };
+
+    return formattedQuestionAnswer;
+}
+
+export { generateQuestions };
